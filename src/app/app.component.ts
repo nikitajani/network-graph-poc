@@ -2,6 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import ForceGraph from 'force-graph';
 import { graphData } from './data';
 
+interface NodeObject {
+  id?: string | number;
+  user?: string;
+  description?: string;
+  x?: number;
+  y?: number;
+  vx?: number;
+  vy?: number;
+  fx?: number;
+  fy?: number;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,7 +28,7 @@ export class AppComponent implements OnInit {
       .linkColor(() => 'rgba(255,255,255,0.2)')
       .linkDirectionalParticles(1)
       .nodeAutoColorBy('user')
-      .nodeLabel((node) => `${node.id}`)
+      .nodeLabel((node: NodeObject) => `${node.user}: ${node.description}`)
       .graphData(graphData);
   }
 }
